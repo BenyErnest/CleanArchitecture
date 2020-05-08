@@ -56,6 +56,8 @@ namespace CleanArchitecture.WebUI
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            var description = Configuration.GetValue<string>("Description");
+
             services.AddOpenApiDocument(configure =>
             {
                 configure.Title = "CleanArchitecture API";
@@ -64,7 +66,7 @@ namespace CleanArchitecture.WebUI
                     Type = OpenApiSecuritySchemeType.ApiKey,
                     Name = "Authorization",
                     In = OpenApiSecurityApiKeyLocation.Header,
-                    Description = "Type into the textbox: Bearer {your JWT token}."
+                    Description = Configuration.GetValue<string>("Description")
                 });
 
                 configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
