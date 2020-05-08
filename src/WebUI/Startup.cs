@@ -56,6 +56,7 @@ namespace CleanArchitecture.WebUI
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //Added to check value according to the environment
             var description = Configuration.GetValue<string>("Description");
 
             services.AddOpenApiDocument(configure =>
@@ -66,6 +67,8 @@ namespace CleanArchitecture.WebUI
                     Type = OpenApiSecuritySchemeType.ApiKey,
                     Name = "Authorization",
                     In = OpenApiSecurityApiKeyLocation.Header,
+                    //When read from appsettings.json (no problem)
+                    //when read from appsettings.Development.json (no value)
                     Description = Configuration.GetValue<string>("Description")
                 });
 
